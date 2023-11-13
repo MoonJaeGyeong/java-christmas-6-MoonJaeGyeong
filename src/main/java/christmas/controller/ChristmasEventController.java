@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Order;
 import christmas.domain.VisitDay;
 import christmas.util.Iterator;
 import christmas.view.InputView;
@@ -18,11 +19,16 @@ public class ChristmasEventController {
     }
     public void run(){
         outputView.printGreetings();
-        VisitDay visitDay = getVisitDay();
 
+        VisitDay visitDay = getVisitDay();
+        Order order = getOrder();
     }
 
     private VisitDay getVisitDay(){
         return iterator.iterate(() -> new VisitDay(inputView.RequestDayByUserInput()));
+    }
+
+    private Order getOrder(){
+        return iterator.iterate( () -> new Order(inputView.RequestMenuByUserInput()));
     }
 }
