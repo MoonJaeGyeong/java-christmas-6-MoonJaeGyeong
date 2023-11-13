@@ -4,10 +4,16 @@ import christmas.view.constant.ConstantMessage;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class OutputView {
     public static final NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.KOREA);
-    private static String SPACE = " ";
+
+    private final static String PRESENTATION_NUMBER = "1";
+    private final static String SPACE = " ";
+    private final static String EA = "개";
+    private final static String WON = "원";
+
 
     public void printErrorMessage(String errorMessage){
         System.out.println(errorMessage);
@@ -16,20 +22,23 @@ public class OutputView {
         printConstantMessage(ConstantMessage.Greetings);
     }
 
-    public static void printOrderMenu(HashMap<String, Integer> order_Menu){
+    public static void printOrderMenu(Map<String, Integer> order_Menu){
         printConstantMessage(ConstantMessage.ORDER_MENU);
         for(String menu : order_Menu.keySet()){
-            System.out.println(menu + SPACE + order_Menu.get(menu).toString());
+            System.out.println(menu + SPACE + order_Menu.get(menu).toString() + EA);
         }
+        printNewLine();
     }
 
     public static void printTotalPriceBeforeDiscount(int price){
         printConstantMessage(ConstantMessage.TOTAL_PRICE_BEFORE_DISCOUNT);
         printPriceAfterFormating(price);
+        printNewLine();
     }
 
-    public static void printPresentationMenu(){
+    public static void printPresentationMenu(String presentation){
         printConstantMessage(ConstantMessage.PRESENTATION_MENU);
+        System.out.println(presentation);
     }
 
     public static void printBenefitDetails(){
@@ -53,10 +62,14 @@ public class OutputView {
 
     private static void printPriceAfterFormating(int price){
         String amount = numberFormat.format(price);
-        System.out.println(amount + "원");
+        amount = amount.replace("₩", "");
+        System.out.println(amount + WON);
     }
 
     private static void printConstantMessage(ConstantMessage constantMessage){
         System.out.println(constantMessage.getMessage());
+    }
+    private static void printNewLine() {
+        System.out.println();
     }
 }
