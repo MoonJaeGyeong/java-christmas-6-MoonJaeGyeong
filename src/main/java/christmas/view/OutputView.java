@@ -8,6 +8,10 @@ import java.util.Locale;
 public class OutputView {
     public static final NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.KOREA);
     private static String SPACE = " ";
+
+    public void printErrorMessage(String errorMessage){
+        System.out.println(errorMessage);
+    }
     public static void printGreetings(){
         printConstantMessage(ConstantMessage.Greetings);
     }
