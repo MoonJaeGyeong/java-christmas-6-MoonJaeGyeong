@@ -6,18 +6,18 @@ import christmas.domain.restaurant.Restaurant;
 import christmas.util.Parser;
 import christmas.util.validate.IllegalArgumentExceptionType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
-    private final List<String> userOrders_Menu;
-    private final List<Integer> userOrders_Count;
+    private final Map<String, Integer> userOrders;
     private final  Restaurant restaurant;
     private static final int MINIMUM_ORDER_AMOUNT = 10000;
     private static final int MENU_LIMIT_COUNT = 20;
 
     public Order(String order_Menu){
-        this.userOrders_Menu = new ArrayList<>();
-        this.userOrders_Count = new ArrayList<>();
+        this.userOrders = new HashMap<>();
         this.restaurant = new Restaurant();
 
         SetMenuByUserInput(order_Menu);
@@ -25,10 +25,14 @@ public class Order {
     }
     public int TotalPrice(){
         int total_Price = 0;
-        for(int i=0; i< userOrders_Menu.size(); i++){
-            total_Price += restaurant.getPriceOfMenu(userOrders_Menu.get(i)) * userOrders_Count.get(i);
+        for(String menu : userOrders.keySet()){
+            total_Price += restaurant.getPriceOfMenu(menu) * userOrders.get(menu);
         }
         return total_Price;
+    }
+
+    public Map<String, Integer> getUserOrders(){
+        return userOrders;
     }
     private void SetMenuByUserInput(String order_Menu){
         Parser parser = new Parser();
@@ -38,9 +42,8 @@ public class Order {
             List<String> parts = parser.parseSplitByCriterion(item, "-");
             validate(parts);
             String food = parts.get(0);
-            int quantity = Integer.parseInt(parts.get(1));
-            userOrders_Menu.add(food);
-            userOrders_Count.add(quantity);
+            int number = Integer.parseInt(parts.get(1));
+            userOrders.put(food, number);
         }
     }
 
@@ -70,7 +73,7 @@ public class Order {
     }
 
     private void checkDuplicateMenu(List<String> input){
-        if(userOrders_Menu.contains(input.get(0))){
+        if(userOrders.containsKey(input.get(0))){
             throw IllegalArgumentExceptionType.MENU_INPUT_ERROR.getException();
         }
     }
@@ -84,20 +87,20 @@ public class Order {
 
     private void CheckMenuTypeNotOnlyBEVERAGE(){
         int n = 0;
-        for(String menu : userOrders_Menu){
+        for(String menu : userOrders.keySet()){
             if(restaurant.getMenuTypeOfMenu(menu) == MenuType.BEVERAGE){
                 n++;
             }
         }
-        if(n == userOrders_Menu.size()){
+        if(n == userOrders.size()){
             throw IllegalArgumentExceptionType.MENU_ONLY_BEVERAGE.getException();
         }
     }
 
     private void CheckMenuCountOverLimit(){
         int sum = 0;
-        for(int quantity : userOrders_Count){
-            sum += quantity;
+        for(String menu : userOrders.keySet()){
+            sum += userOrders.get(menu);
         }
 
         if(sum > MENU_LIMIT_COUNT){
