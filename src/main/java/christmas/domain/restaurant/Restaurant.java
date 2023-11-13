@@ -11,7 +11,7 @@ public class Restaurant {
         initializeMenu();
     }
 
-    public boolean HaveRestaurantMenu(String menu){
+    public boolean HasRestaurantMenu(String menu){
        return menuMap.containsKey(menu);
     }
 
