@@ -21,6 +21,10 @@ public class OutputView {
         printlnConstantMessage(ConstantMessage.Greetings);
     }
 
+    public static void printEventGuidelines(){
+        printlnConstantMessage(ConstantMessage.GUIDE_LINE);
+    }
+
     public static void printEventBenefitNotice(int day){
         printfConstantMessage(ConstantMessage.EVENT_MONTH);
         System.out.printf(SPACE + day);

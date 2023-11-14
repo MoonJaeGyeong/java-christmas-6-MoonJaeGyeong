@@ -13,6 +13,8 @@ public class ChristmasEventController {
     private final OutputView outputView;
     private final Iterator iterator;
 
+    private static final int MINIMUM_AMOUNT_FOR_EVENT = 10000;
+
     public ChristmasEventController(InputView inputView, OutputView outputView, Iterator iterator){
         this.inputView = inputView;
         this.outputView = outputView;
@@ -23,6 +25,8 @@ public class ChristmasEventController {
         VisitDay visitDay = getVisitDay();
         Order order = getOrder();
 
+
+
         outputView.printEventBenefitNotice(visitDay.getDay());
         printMenuAndTotalPrice(order);
         JoinEvent(visitDay,order);
@@ -30,6 +34,10 @@ public class ChristmasEventController {
 
     private void printMenuAndTotalPrice(Order order){
         int total_Price = order.TotalPrice();
+
+        if(total_Price < MINIMUM_AMOUNT_FOR_EVENT){
+            outputView.printEventGuidelines();
+        }
 
         outputView.printOrderMenu(order.getUserOrders());
         outputView.printTotalPriceBeforeDiscount(total_Price);
