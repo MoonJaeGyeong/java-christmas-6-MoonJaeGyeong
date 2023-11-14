@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class OutputView {
     public static final NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.KOREA);
-    
+
     private final static String SPACE = " ";
     private final static String EA = "개";
     private final static String WON = "원";
