@@ -87,9 +87,11 @@ public class EventDiscount {
 
     private void setWeekendDiscount(Order order){
         int discount = 0;
-        for(MenuType menuType : order.getOrderMenuType()){
-            if(menuType == MenuType.MAIN){
-                discount += WEEKEND_MAIN_DISCOUNT.getDiscountPrice();
+        Restaurant restaurant = new Restaurant();
+
+        for(String menu : order.getUserOrders().keySet()){
+            if(restaurant.getMenuTypeOfMenu(menu) == MenuType.MAIN){
+                discount += WEEKEND_MAIN_DISCOUNT.getDiscountPrice() * order.getUserOrders().get(menu);
             }
         }
         discountInfo.put(WEEKEND_MAIN_DISCOUNT.getDiscountName(),discount);
