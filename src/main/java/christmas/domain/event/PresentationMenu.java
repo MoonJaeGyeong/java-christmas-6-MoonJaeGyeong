@@ -14,7 +14,7 @@ public class PresentationMenu {
     }
 
     public boolean isPresentation(){
-        return !presentation.equals("없음");
+        return !presentation.equals(NOTHING);
     }
 
     private String SelectPresentationByTotalPrice(int total_Price){

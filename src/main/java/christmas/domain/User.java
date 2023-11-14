@@ -10,7 +10,7 @@ public class User {
     private final Order order;
     private final VisitDay visitDay;
 
-    public User(Order order, VisitDay visitDay){
+    public User(VisitDay visitDay, Order order){
         this.order = order;
         this.visitDay = visitDay;
     }
