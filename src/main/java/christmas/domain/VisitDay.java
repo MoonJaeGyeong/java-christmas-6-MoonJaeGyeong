@@ -6,11 +6,28 @@ public class VisitDay {
     private static final int EVENT_START_DAY = 1;
     private static final int EVENT_END_DAY = 31;
 
+    private static final int CHRISTMAS_DAY = 25;
+
     private final int day;
 
     public VisitDay(String day){
         validate(day);
         this.day = Integer.parseInt(day);
+    }
+    public boolean isBeforeChristmas(){
+        return day <= CHRISTMAS_DAY;
+    }
+
+    public boolean isWeekend(){
+        return (day%7 == 1 || day%7 == 2);
+    }
+
+    public boolean isStarDay(){
+        return (day%7 == 3 || day == CHRISTMAS_DAY);
+    }
+
+    public int CalculateDaysToChristmas(){
+        return CHRISTMAS_DAY - day;
     }
 
     private void validate(String input){

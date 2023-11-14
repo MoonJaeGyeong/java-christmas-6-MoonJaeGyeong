@@ -31,6 +31,16 @@ public class Order {
         return total_Price;
     }
 
+    public List<MenuType> getOrderMenuType(){
+        List<MenuType> menuTypes = new ArrayList<>();
+        Restaurant restaurant = new Restaurant();
+        for(String menu : userOrders.keySet()){
+            menuTypes.add(restaurant.getMenuTypeOfMenu(menu));
+        }
+
+        return menuTypes;
+    }
+
     public Map<String, Integer> getUserOrders(){
         return userOrders;
     }
