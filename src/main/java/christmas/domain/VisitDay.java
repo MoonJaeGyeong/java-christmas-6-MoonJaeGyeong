@@ -27,7 +27,7 @@ public class VisitDay {
     }
 
     public int CalculateDaysToChristmas(){
-        return CHRISTMAS_DAY - day;
+        return day - EVENT_START_DAY;
     }
 
     private void validate(String input){
