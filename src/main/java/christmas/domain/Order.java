@@ -50,8 +50,9 @@ public class Order {
     private void validate(List<String> input){
         CheckInputForm(input);
         CheckHasMenu(input);
-        checkQuantityIsNumeric(input);
-        checkDuplicateMenu(input);
+        CheckCountIsNumeric(input);
+        CheckValidNumber(input);
+        CheckDuplicateMenu(input);
     }
 
     private void CheckInputForm(List<String> input){
@@ -66,13 +67,20 @@ public class Order {
         }
     }
 
-    private void checkQuantityIsNumeric(List<String> input){
+    private void CheckCountIsNumeric(List<String> input){
         if(!input.get(1).matches("\\d+")){
             throw IllegalArgumentExceptionType.MENU_INPUT_ERROR.getException();
         }
     }
 
-    private void checkDuplicateMenu(List<String> input){
+    private void CheckValidNumber(List<String> input){
+        int count = Integer.parseInt(input.get(1));
+        if(count < 1){
+            throw IllegalArgumentExceptionType.MENU_INPUT_ERROR.getException();
+        }
+    }
+
+    private void CheckDuplicateMenu(List<String> input){
         if(userOrders.containsKey(input.get(0))){
             throw IllegalArgumentExceptionType.MENU_INPUT_ERROR.getException();
         }
