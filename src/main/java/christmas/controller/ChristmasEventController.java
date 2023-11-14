@@ -1,8 +1,8 @@
 package christmas.controller;
 
 import christmas.domain.Order;
-import christmas.domain.event.PresentationMenu;
 import christmas.domain.VisitDay;
+import christmas.domain.event.EventBenefit;
 import christmas.util.Iterator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -20,20 +20,33 @@ public class ChristmasEventController {
     }
     public void run(){
         outputView.printGreetings();
-
         VisitDay visitDay = getVisitDay();
         Order order = getOrder();
 
-        printUserOrderAndTotalPriceAndPresentation(order);
+        outputView.printEventBenefitNotice(visitDay.getDay());
+        printMenuAndTotalPrice(order);
+        JoinEvent(visitDay,order);
     }
 
-    private void printUserOrderAndTotalPriceAndPresentation(Order order){
+    private void printMenuAndTotalPrice(Order order){
         int total_Price = order.TotalPrice();
 
         outputView.printOrderMenu(order.getUserOrders());
         outputView.printTotalPriceBeforeDiscount(total_Price);
-        PresentationMenu presentationMenu = new PresentationMenu(total_Price);
-        outputView.printPresentationMenu(presentationMenu.getPresentation());
+    }
+
+    private void JoinEvent(VisitDay visitDay, Order order){
+        EventBenefit eventBenefit = new EventBenefit(visitDay, order);
+
+        printBenefitInfo(order,eventBenefit);
+    }
+
+    private void printBenefitInfo(Order order, EventBenefit eventBenefit){
+        outputView.printPresentationMenu(eventBenefit.getPresentation());
+        outputView.printBenefitInfo(eventBenefit.getBenefitInfo());
+        outputView.printTotalBenefitPrice(eventBenefit.getTotalBenefitPrice());
+        outputView.printTotalPriceAfterDiscount(order.TotalPrice() + eventBenefit.getTotalDiscountPrice());
+        outputView.printEventBadge(eventBenefit.getBadge());
     }
 
     private VisitDay getVisitDay(){
@@ -43,4 +56,5 @@ public class ChristmasEventController {
     private Order getOrder(){
         return iterator.iterate( () -> new Order(inputView.RequestMenuByUserInput()));
     }
+
 }
