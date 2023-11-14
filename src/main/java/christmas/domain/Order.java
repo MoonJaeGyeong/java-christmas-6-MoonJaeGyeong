@@ -13,7 +13,6 @@ import java.util.Map;
 public class Order {
     private final Map<String, Integer> userOrders;
     private final  Restaurant restaurant;
-    private static final int MINIMUM_ORDER_AMOUNT = 10000;
     private static final int MENU_LIMIT_COUNT = 20;
 
     public Order(String order_Menu){

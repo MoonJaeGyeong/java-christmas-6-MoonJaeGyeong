@@ -3,27 +3,33 @@ package christmas.domain;
 import christmas.util.validate.IllegalArgumentExceptionType;
 
 public class VisitDay {
+    private final int day;
+
     private static final int EVENT_START_DAY = 1;
     private static final int EVENT_END_DAY = 31;
-
     private static final int CHRISTMAS_DAY = 25;
-
-    private final int day;
+    private static final int ONE_WEEK = 7;
+    private static final int FRIDAY = 1;
+    private static final int SATURDAY = 2;
+    private static final int SUNDAY = 3;
 
     public VisitDay(String day){
         validate(day);
         this.day = Integer.parseInt(day);
+    }
+    public int getDay(){
+        return day;
     }
     public boolean isBeforeChristmas(){
         return day <= CHRISTMAS_DAY;
     }
 
     public boolean isWeekend(){
-        return (day%7 == 1 || day%7 == 2);
+        return (day%ONE_WEEK == FRIDAY || day%ONE_WEEK == SATURDAY);
     }
 
     public boolean isStarDay(){
-        return (day%7 == 3 || day == CHRISTMAS_DAY);
+        return (day%ONE_WEEK == SUNDAY || day == CHRISTMAS_DAY);
     }
 
     public int CalculateDaysToChristmas(){
