@@ -13,9 +13,6 @@ public class InputView {
         printConstantMessage(ConstantMessage.REQUEST_MENU);
         return Console.readLine();
     }
-    private static void printNewLine() {
-        System.out.println();
-    }
     private static void printConstantMessage(ConstantMessage constantMessage){
         System.out.println(constantMessage.getMessage());
     }
