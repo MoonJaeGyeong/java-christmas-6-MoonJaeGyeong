@@ -42,9 +42,65 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 날짜_없는_날짜_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException("32");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
     void 주문_예외_테스트() {
         assertSimpleTest(() -> {
             runException("3", "제로콜라-a");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    void 주문_형식_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    void 주문_0개_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-0");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    void 주문_20개_이상_테스트() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-21,아이스크림-1");
+            assertThat(output()).contains("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해주세요.");
+        });
+    }
+
+    @Test
+    void 주문_메뉴_모두_음료_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-2,샴페인-1");
+            assertThat(output()).contains("[ERROR] 음료만 주문할 수는 없습니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    void 주문_메뉴_없음_테스트() {
+        assertSimpleTest(() -> {
+            runException("3", "제로사이다-2");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    void 주문_메뉴_중복_테스트() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-2,제로콜라-2");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
