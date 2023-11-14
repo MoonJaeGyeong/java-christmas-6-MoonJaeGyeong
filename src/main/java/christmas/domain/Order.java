@@ -96,7 +96,6 @@ public class Order {
     }
 
     private void ExceptionAfterOrder(){
-        // 10,000원 이하 일 시
         CheckMenuTypeNotOnlyBEVERAGE();
         CheckMenuCountOverLimit();
     }
