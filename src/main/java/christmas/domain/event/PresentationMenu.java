@@ -7,7 +7,7 @@ public class PresentationMenu {
     private static final int MINIMUM_PRICE_PRICE_FOR_PRESENTATION = 120000;
 
     public PresentationMenu(int total_Price){
-        this.presentation = SelectPresentationByDiscountPrice(total_Price);
+        this.presentation = SelectPresentationByTotalPrice(total_Price);
     }
     public String getPresentation(){
         return presentation;
