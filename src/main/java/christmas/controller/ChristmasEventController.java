@@ -11,7 +11,7 @@ import christmas.view.OutputView;
 public class ChristmasEventController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final Iterator iterator;
+    private final Iterator iterator; // 클래스 생성 실패 시 반복 시키는 클래스
 
     private static final int MINIMUM_AMOUNT_FOR_EVENT = 10000;
 

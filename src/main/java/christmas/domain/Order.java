@@ -46,6 +46,7 @@ public class Order {
         }
     }
 
+    /* 입력 데이터 유효성 검사 */
     private void validate(List<String> input){
         CheckInputForm(input);
         CheckHasMenu(input);
@@ -85,6 +86,7 @@ public class Order {
         }
     }
 
+    /* 메뉴가 음료만 있는지, 갯수가 제한을 넘었는지 주문서를 저장 후 검사 진행 */
     private void ExceptionAfterOrder(){
         CheckMenuTypeNotOnlyBEVERAGE();
         CheckMenuCountOverLimit();

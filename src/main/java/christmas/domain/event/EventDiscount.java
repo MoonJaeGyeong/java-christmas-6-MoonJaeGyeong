@@ -40,7 +40,6 @@ public class EventDiscount {
                 .mapToInt(Integer::intValue).sum();
     }
 
-
     private void CalculateDiscount(VisitDay visitDay, Order order){
         ChristmasD_DayDiscount(visitDay);
         WeekDayDiscount(visitDay, order);
