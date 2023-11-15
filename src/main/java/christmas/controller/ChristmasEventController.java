@@ -25,8 +25,6 @@ public class ChristmasEventController {
         VisitDay visitDay = getVisitDay();
         Order order = getOrder();
 
-
-
         outputView.printEventBenefitNotice(visitDay.getDay());
         printMenuAndTotalPrice(order);
         JoinEvent(visitDay,order);

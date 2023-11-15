@@ -20,7 +20,6 @@ public class OutputView {
     public static void printGreetings(){
         printlnConstantMessage(ConstantMessage.Greetings);
     }
-
     public static void printEventGuidelines(){
         printlnConstantMessage(ConstantMessage.GUIDE_LINE);
     }
